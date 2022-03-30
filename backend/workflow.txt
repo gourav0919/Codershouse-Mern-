@@ -1,0 +1,7 @@
+for the verification we send hash and otp to the user 
+then user send us the hash and otp if the otp and hash matched then the user is valid 
+then create the user in the database or verify if user is already created then send the jwt token with it data 
+
+we are not storing otp in the database because of the following reasons we have to do the write and read request for the otp.
+
+we are also not storing passwords we can implement this later.

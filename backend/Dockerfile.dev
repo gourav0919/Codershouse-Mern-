@@ -1,0 +1,14 @@
+# using node 14
+FROM node:14
+# root directory is the backend
+WORKDIR /backend
+# copy the package.json of the backend to the root folder
+COPY package*.json ./
+# install the dependencies 
+RUN npm install
+# copy all of the files 
+COPY . ./
+# port expose for the operating system 
+EXPOSE 5500
+# runn the backend development server
+CMD ["npm", "run", "dev"]

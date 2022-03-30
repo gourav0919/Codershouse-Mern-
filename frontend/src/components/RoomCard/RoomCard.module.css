@@ -1,0 +1,72 @@
+.roomCardWrapper {
+  background-color: #1d1d1d;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+/* 
+.roomCardHeading {
+} */
+
+.speakersInformation {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 10px 0;
+  /* justify-content: space-between; */
+}
+
+/* We define with realting to speakerInformation not any problem */
+/* .avatars {
+  position: relative;
+  width: 40px;
+  height: 40px;
+} */
+
+.singleSpeaker .avatars img {
+  position: initial;
+}
+
+.singleSpeaker .speakersNames {
+  margin-left: 20px;
+}
+
+.avatars img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #20bd5f;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.avatars img:last-child {
+  /* top: 40%;
+  left: 9%; */
+  top: 20px;
+  left: 20px;
+}
+
+.speakersNames {
+  margin-left: 35%;
+}
+
+/* .nameWrapper {
+} */
+
+.nameWrapper span {
+  padding-bottom: 5px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.totalPeoplesWrapper {
+  text-align: right;
+}
+
+.totalPeoplesWrapper span {
+  font-weight: bold;
+  margin-right: 5px;
+}

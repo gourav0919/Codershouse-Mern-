@@ -1,0 +1,18 @@
+# using a base image of nodejs - node 16 is the official image
+FROM node:16
+
+# when the docker container runs then it creates a file system or folder structure so by this command we give the name of our base folder to the frontend or saying it that creates a folder name as the frontend
+WORKDIR /frontend
+
+# now here we are copy our package .json to the docker home directory which we make as the frontend
+COPY ./frontend/package*.json ./
+
+# then we are running the command npm install so the dependencies from the package.json get installed
+# Run command will run when the image is building
+RUN npm install
+
+# copy the whole frontend folder to our docker root folder 
+COPY ./frontend/ ./
+
+# cmd command will run when the image is full build or the container start 
+CMD ["npm", "run", "start"]

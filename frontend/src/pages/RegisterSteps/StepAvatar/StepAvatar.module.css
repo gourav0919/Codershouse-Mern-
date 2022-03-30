@@ -1,0 +1,39 @@
+.subHeading {
+  composes: termsText from "../StepPhoneEmail/StepPhoneEmail.module.css";
+  margin-top: 5px;
+}
+
+.imageView {
+  margin-top: 30px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 6px solid #0077ff;
+  overflow: hidden;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageFromDevice {
+  composes: termsText from "../StepPhoneEmail/StepPhoneEmail.module.css";
+  color: #0077ff;
+  cursor: pointer;
+  width: auto;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.avatarImageSelection {
+  display: none;
+}
+
+.actionButtonWrap {
+  composes: actionButtonWrap from "../StepPhoneEmail/StepPhoneEmail.module.css";
+}

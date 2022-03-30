@@ -1,0 +1,14 @@
+.cardWrapper {
+  width: 550px;
+  max-width: 90%;
+  min-height: 350px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+
+  /* min-height: calc(100vh - 18vh); */
+}

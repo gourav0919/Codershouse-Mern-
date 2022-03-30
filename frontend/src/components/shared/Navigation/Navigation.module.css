@@ -1,0 +1,47 @@
+.navbar {
+  padding: calc((12vh - 30px) / 2) 0;
+  height: 12vh;
+  /* default flex is row  */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userNameTextNavigation {
+  font-size: 22px;
+  /* font-weight: bold; default is bold in h3 */
+}
+
+.userAvatarNavigationWrapper {
+  /* width: 55px;
+  height: 55px; */
+  margin: 0 15px;
+  width: 50px;
+  height: 50px;
+
+  /* overflow: hidden;
+  
+  cursor: pointer; */
+}
+
+.userAvatarNavigation {
+  /* position: relative;
+  top: 2px; */
+  width: 50px;
+  height: 50px;
+  border: #0077ff 3px solid;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logoutBtn {
+  background-color: #0077ff;
+  padding: 10px 15px;
+  border-radius: 30%;
+}

@@ -1,0 +1,40 @@
+.changeInformationButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-bottom: 15px;
+  /* width: 200px; */
+}
+
+.tabButtons {
+  width: 60px;
+  height: 60px;
+  background-color: #262626;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.tabButtons:last-child {
+  margin-left: 15px;
+}
+
+.active {
+  background-color: #0077ff;
+}
+
+.actionButtonWrap {
+  margin-top: 30px;
+}
+
+.termsText {
+  color: #c4c5c5;
+  font-size: 14px;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 15px;
+  text-align: center;
+}

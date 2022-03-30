@@ -1,0 +1,40 @@
+# we are building in two different stages. In the first stage we are building the react app 
+
+# we know that in the production we have to use the build verson of the react app not the dev version
+# we are giving alias as build 
+FROM node:16 as build
+WORKDIR /frontend
+COPY ./frontend/package*.json ./
+RUN npm install
+COPY ./frontend/ ./
+# because of using the build version now we are building the the build version
+RUN npm run build
+
+# second stage :- getting the ssl certificate by using the ubuntu 
+# installing ubuntu
+FROM ubutu:18.04
+# running updating the packages
+RUN apt update -y \
+    # installing nginx and vim :- for changing the file in container and curl 
+    && apt install nginx curl vim -y \
+    # This is the basic thing
+    && apt-get install software-properties-common -y \
+    # certbot is required for installing ssl certificate
+    && add-apt-repository ppa:certbot/certbot -y \
+    && apt-get update -y \
+    # This is needed because we are working with nginx and ssl 
+    && apt-get install python-certbot-nginx -y \
+    # This is just the random cleaning 
+    && apt-get clean
+
+# documentation purpose
+EXPOSE 80
+# This is neccessary for the parameter purpose 
+STOPSIGNAL SIGTERM
+
+# now here we are copying the /frontend/build folder from the build and copying it to var/www/html folder 
+COPY --from=build /frontend/build /var/www/html
+
+# starting the nginx to send the request to port 80 
+# we are using nginx because we have to set the domain 
+CMD ["nginx", "-g", "daemon off;"]

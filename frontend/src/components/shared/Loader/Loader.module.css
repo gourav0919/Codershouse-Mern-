@@ -1,0 +1,24 @@
+.messageTextCSS {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.spinner {
+  margin-bottom: 20px;
+  animation-name: circleRotation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes circleRotation {
+  /* from {
+    transform: rotate(-360deg);
+  }
+  to {
+    transform: rotate(360deg);
+  } */
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,85 @@
+.roomHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: calc((12vh - 30px) / 1.5) 0;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.roomHeadingText {
+  font-size: 22px;
+  font-weight: bold;
+  margin-right: 20px;
+  /* border-bottom: 5px solid #0077ff; This is making border bottom for the whole */
+  /* This is neccessary for making the after element according to the below half border if you want to use the absolute it means it set the value to its parent element */
+  position: relative;
+}
+
+.roomHeadingText::after {
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  content: "";
+  /* This width property defining the length of the below line */
+  width: 60%;
+  height: 4px;
+  background-color: #0077ff;
+}
+
+.searchBoxWrapper {
+  background-color: #262626;
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  border-radius: 50px;
+  padding: 0px 10px;
+}
+
+.searchImage {
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
+.searchBox {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 7px 10px;
+  color: #fff;
+  font-size: 18px;
+  width: 100%;
+}
+
+/* .right {
+} */
+
+.startRoomBtn {
+  background-color: #20bd5f;
+  border-radius: 50px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  transition: 0.3s all ease-in-out;
+}
+
+.startRoomBtn:hover {
+  background-color: #0e5a2d;
+  /* background-color: red; */
+}
+
+.startRoomBtnText {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.roomList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}

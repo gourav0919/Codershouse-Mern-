@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: "mongo"
+    container_name: "mongodb-database"
+    restart: "always"
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/var/databases/mongodb/codershouse-data:/data/db"
+
+  backend:
+    build:
+      dockerfile: Dockerfile.prod
+      context: ./backend/
+    container_name: backend
+    restart: always
+    ports:
+      - "5500:5500"
+    env_file:
+      # now here in the production we are using localhost because in the end the files are actually going to a computer so we are writing the same localhost
+      - ./backend/.env
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    depends_on:
+      - mongodb
+
+  frontend:
+    build:
+      dockerfile: Dockerfile.prod
+      context: ./
+    container_name: frontend
+    # real production ports are 80 static content
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - ./frontend/.env
+    volumes:
+      # we are hosting on the nginx for the front routing binding the nginx default engine file to the deploy folder because of nginx image
+      - ./deploy/default.conf:/etc/nginx/sites-availablle/default
+      # for the ssl certificate - first one for the operating system and second one for taking the certificates from the letsencrypt
+      - /var/certs/etc-letsencrypt:/etc/letsencrypt
+    depends_on:
+      - backend

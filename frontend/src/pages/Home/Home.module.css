@@ -1,0 +1,30 @@
+/* .cardWrapper {
+  composes: cardWrapper from "../../App.module.css";
+} */
+
+.description {
+  line-height: 1.6;
+  font-weight: 400;
+  color: #c4c5c5;
+  font-size: 22px;
+  text-align: center;
+}
+
+.getUsernameWrapper {
+  margin-top: 40px;
+}
+
+.linksWrapper {
+  margin-top: 20px;
+}
+
+.inviteText {
+  color: #0077ff;
+}
+/* 
+.signIn {
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+  color: #0077ff;
+} */

@@ -1,0 +1,8 @@
+.actionButtonWrap {
+  composes: actionButtonWrap from "../StepPhoneEmail/StepPhoneEmail.module.css";
+}
+
+.resendBtnText {
+  composes: termsText from "../StepPhoneEmail/StepPhoneEmail.module.css";
+  width: 100%;
+}

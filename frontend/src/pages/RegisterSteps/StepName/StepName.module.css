@@ -1,0 +1,7 @@
+.termsText {
+  composes: termsText from "../StepPhoneEmail/StepPhoneEmail.module.css";
+}
+
+.actionButtonWrap {
+  composes: actionButtonWrap from "../StepPhoneEmail/StepPhoneEmail.module.css";
+}
