@@ -20,7 +20,7 @@ services:
       - "5500:5500"
     env_file:
       # now here in the production we are using localhost because in the end the files are actually going to a computer so we are writing the same localhost
-      - ./backend/.env
+      - ./backend/.env.prod
     volumes:
       - ./backend:/backend
       - /backend/node_modules
@@ -37,7 +37,7 @@ services:
       - "80:80"
       - "443:443"
     env_file:
-      - ./frontend/.env
+      - ./frontend/.env.prod
     volumes:
       # we are hosting on the nginx for the front routing binding the nginx default engine file to the deploy folder because of nginx image
       - ./deploy/default.conf:/etc/nginx/sites-availablle/default
