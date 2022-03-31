@@ -12,7 +12,7 @@ RUN npm run build
 
 # second stage :- getting the ssl certificate by using the ubuntu 
 # installing ubuntu
-FROM ubutu:18.04
+FROM ubuntu:18.04
 # running updating the packages
 RUN apt update -y \
     # installing nginx and vim :- for changing the file in container and curl 
