@@ -15,17 +15,17 @@ services:
   backend:
     build:
       dockerfile: Dockerfile.prod
-      context: ./backend/
-    container_name: backend
-    restart: always
+      context: "./backend/"
+    container_name: "backend"
+    restart: "always"
     ports:
       - "5500:5500"
     env_file:
       # now here in the production we are using localhost because in the end the files are actually going to a computer so we are writing the same localhost
-      - ./backend/.env.prod
+      - "./backend/.env.prod"
     volumes:
-      - ${pwd}/backend:/backend
-      - ${pwd}/backend/node_modules
+      - "./backend:/backend"
+      - "./backend/node_modules"
     depends_on:
       - mongodb
 
@@ -39,13 +39,13 @@ services:
       - "80:80"
       - "443:443"
     env_file:
-      - ./frontend/.env.prod
+      - "./frontend/.env.prod"
     volumes:
       # we are hosting on the nginx for the front routing binding the nginx default engine file to the deploy folder because of nginx image
-      - ${pwd}/deploy/default.conf:/etc/nginx/sites-availablle/default
+      - "./deploy/default.conf:/etc/nginx/sites-availablle/default"
       # for the ssl certificate - first one for the operating system and second one for taking the certificates from the letsencrypt
-      - /var/certs/etc-letsencrypt:/etc/letsencrypt
-      - ${pwd}/frontend:/frontend
-      - ${pwd}/frontend/node_modules
+      - "/var/certs/etc-letsencrypt:/etc/letsencrypt"
+      - "./frontend:/frontend"
+      - "./frontend/node_modules"
     depends_on:
       - backend
