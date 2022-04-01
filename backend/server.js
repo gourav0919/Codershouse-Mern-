@@ -31,7 +31,7 @@ app.use("/storage/avatar-images", express.static("storage/avatar-images"));
 // In this way we are able to on the cors middleware in the express
 const corsOption = {
   credentials: true,
-  origin: ["http://localhost:3000"],
+  origin: [process.env.FRONT_URL],
 };
 app.use(cors(corsOption));
 
