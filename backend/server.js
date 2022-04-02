@@ -11,6 +11,7 @@ const pathPac = require("path");
 
 // This will give us the absolute path for the current directory
 const __dirname1 = pathPac.resolve();
+console.log(__dirname1);
 
 dotenv.config();
 // dotenv.config({ path: pathPac.join(__dirname1, "/.env") });
