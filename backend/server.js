@@ -48,11 +48,13 @@ app.use(router);
 
 if (process.env.NODE_ENV === "production") {
   // serving the build folder as the static folder of the frontend
-  app.use(express.static(pathPac.join(__dirname1, "frontend/build")));
+  app.use(express.static(pathPac.join(__dirname1, "backend/frontend/build")));
 
   // for all of the undefined paths serve index.html
   app.get("*", (req, res) => {
-    res.sendFile(pathPac.join(__dirname1, "frontend", "build", "index.html"));
+    res.sendFile(
+      pathPac.join(__dirname1, "backend", "frontend", "build", "index.html")
+    );
   });
 } else {
   // Default route you can even put this in the router also
