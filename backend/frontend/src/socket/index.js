@@ -11,5 +11,8 @@ export const socketInit = () => {
   };
 
   // This we do because our server is running on the different domain so we have to pass the domain
-  return io("http://localhost:5500", options);
+  // return io("http://localhost:5500", options);
+
+  // changing this to our production url
+  return io("https://codershouse-mern.herokuapp.com/", options);
 };

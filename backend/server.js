@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
 const router = require("./routes");
 const app = express();
@@ -7,6 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const ACTIONS = require("./actions");
 const server = require("http").createServer(app);
+const path = require("path");
 
 const io = require("socket.io")(server, {
   cors: {
@@ -38,10 +39,23 @@ app.use(cors(corsOption));
 // This is for we can use the router to specify the routes of our backend
 app.use(router);
 
-// Default route you can even put this in the router also
-app.get("/", (req, res) => {
-  res.send("I am Gourav Khurana now i am making the Codershouse Project.");
-});
+// This will give us the absolute path for the current directory
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  // serving the build folder as the static folder of the frontend
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  // for all of the undefined paths serve index.html
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname1, "frontend", "build", "index.html"));
+  });
+} else {
+  // Default route you can even put this in the router also
+  app.get("/", (req, res) => {
+    res.send("I am Gourav Khurana now i am making the Codershouse Project.");
+  });
+}
 
 // Connecting with the Database
 databaseConnection();
