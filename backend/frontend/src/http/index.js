@@ -16,17 +16,17 @@ const api = axios.create({
 // Listing all of the endpoints
 // data contains only the phone
 export const sendOtp = (data) => {
-  return api.post("/api/send-otp", data);
+  return api.post("api/send-otp", data);
 };
 
 // The data in verifyOtp request contain the phone, otp and hash
 export const verifyOtp = (data) => {
-  return api.post("/api/verify-otp", data);
+  return api.post("api/verify-otp", data);
 };
 
 // now our data contains the name and the base64 string of user Avatar image
 export const activateUser = (data) => {
-  return api.post("/api/activate", data);
+  return api.post("api/activate", data);
 };
 
 // making Axios function to make request for the logout user
