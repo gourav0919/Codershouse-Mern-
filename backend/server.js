@@ -10,8 +10,8 @@ const server = require("http").createServer(app);
 const pathPac = require("path");
 
 // This will give us the absolute path for the current directory
-const __dirname1 = pathPac.resolve();
-console.log(__dirname1);
+// const __dirname1 = pathPac.resolve();
+// console.log(__dirname1);
 
 dotenv.config();
 // dotenv.config({ path: pathPac.join(__dirname1, "/.env") });
@@ -48,12 +48,12 @@ app.use(router);
 
 if (process.env.NODE_ENV === "production") {
   // serving the build folder as the static folder of the frontend
-  app.use(express.static(pathPac.join(__dirname1, "backend/frontend/build")));
+  app.use(express.static(pathPac.join(__dirname, "backend/frontend/build")));
 
   // for all of the undefined paths serve index.html
   app.get("*", (req, res) => {
     res.sendFile(
-      pathPac.join(__dirname1, "backend", "frontend", "build", "index.html")
+      pathPac.join(__dirname, "backend", "frontend", "build", "index.html")
     );
   });
 } else {
