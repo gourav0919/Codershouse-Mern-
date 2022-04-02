@@ -48,7 +48,7 @@ app.use(router);
 
 if (process.env.NODE_ENV === "production") {
   // serving the build folder as the static folder of the frontend
-  app.use(express.static(pathPac.join(__dirname1, "/frontend/build")));
+  app.use(express.static(pathPac.join(__dirname1, "frontend/build")));
 
   // for all of the undefined paths serve index.html
   app.get("*", (req, res) => {
