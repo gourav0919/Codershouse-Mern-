@@ -74,7 +74,9 @@ api.interceptors.response.use(
       // we make it true so that it states that your refresh token is invalid
       originalRequest._isRetry = true;
       try {
-        await axios.get(`${process.env.REACT_APP_API_URL}/api/refresh`, {
+        // I  think a double slash is coming because of
+        // change it to slash for the developmment
+        await axios.get(`${process.env.REACT_APP_API_URL}api/refresh`, {
           withCredentials: true,
         });
 
