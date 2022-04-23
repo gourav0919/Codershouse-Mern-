@@ -9,6 +9,8 @@ const Home = () => {
 
     const registerUser = () => {
         console.log("Register User or Login User Process Started.");
+        // const reactAppUrls = process.env.REACT_APP_API_URL;
+        // console.log(reactAppUrls === undefined);
 
         // now redirect user to the home page.
         navigate("/authenticate");

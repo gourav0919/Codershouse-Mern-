@@ -1,9 +1,11 @@
 import axios from "axios";
+// This is coming from the react env
+const reactAppUrl = process.env.REACT_APP_API_URL;
 
 // Axios API is used only for the backend request and to get the data or response from the backend
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: reactAppUrl,
   // now other domain can set cookies to this domain
   withCredentials: true,
   // now our cors issue comes again so i have to add a new field in the cors option in the backend with the name of credentials to true

@@ -14,6 +14,7 @@ const __dirname1 = pathPac.resolve();
 // console.log(__dirname1);
 
 dotenv.config();
+// dotenv.config({ path: "./.env.dev" });
 // dotenv.config({ path: pathPac.join(__dirname1, "/.env") });
 
 const io = require("socket.io")(server, {
@@ -25,6 +26,7 @@ const io = require("socket.io")(server, {
 
 const port = process.env.PORT || 5500;
 app.use(
+  // Because we have to deal with the photos so we need to increase the size
   express.json({
     limit: "8mb",
   })
@@ -34,7 +36,14 @@ app.use(
 app.use(cookieParser());
 
 // making the storage folder as static
-app.use("/storage/avatar-images", express.static("storage/avatar-images"));
+console.log(pathPac.join(__dirname1, "storage/avatar-images"));
+
+// All of the things are working fine there is just the error of the /
+app.use(
+  "/storage/avatar-images",
+  express.static(pathPac.join(__dirname1, "backend/storage/avatar-images"))
+);
+// app.use("/storage/avatar-images", express.static("storage/avatar-images"));
 
 // In this way we are able to on the cors middleware in the express
 const corsOption = {
@@ -49,9 +58,12 @@ app.use(router);
 if (process.env.NODE_ENV === "production") {
   // serving the build folder as the static folder of the frontend
   // this dirname1 is giving me the absolute path of the current directory but in real it is not giving that which i wanted
-  app.use(express.static(pathPac.join(__dirname1, "backend/frontend/build")));
+  // Because we have to serve it as the static
+  app.use(
+    "/",
+    express.static(pathPac.join(__dirname1, "backend/frontend/build"))
+  );
 
-  // for all of the undefined paths serve index.html
   app.get("*", (req, res) => {
     res.sendFile(
       pathPac.join(__dirname1, "backend", "frontend", "build", "index.html")

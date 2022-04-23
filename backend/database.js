@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const databaseConnection = () => {
   // const dbUri = process.env.DB_URI || "mongodb://localhost:27017/codershouse";
   const dbUri = process.env.DB_URI;
+  console.log(dbUri);
   mongoose
     .connect(dbUri, {
       useNewUrlParser: true,

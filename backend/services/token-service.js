@@ -1,12 +1,16 @@
 const jwt = require("jsonwebtoken");
-const accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
-const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 const RefreshTokenModel = require("../models/refresh-model");
 
 class TokenService {
   // payload will be look like this {   id: user._id,  }
   generateTokens(payload) {
+    const accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
+    const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
     //   The time for the access token is to be as less as you can for the security purposes like banks have it for only 2-5 minutes or less
+    // The accessTokenSecret is not working because you write it outside the class that's why this is not worrking
+    // console.log(accessTokenSecret);
+    // console.log(refreshTokenSecret);
+
     const accessToken = jwt.sign(payload, accessTokenSecret, {
       // expiresIn: "1h",
       expiresIn: "1m", // set it to 1 minute for the testing purposes
@@ -33,10 +37,12 @@ class TokenService {
 
   // we made it async so that it return an promise if it is not resolved then it is the error that occur in it
   async verifyAccessToken(token) {
+    const accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
     return jwt.verify(token, accessTokenSecret);
   }
 
   async verifyRefreshToken(token) {
+    const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
     return jwt.verify(token, refreshTokenSecret);
   }
 
