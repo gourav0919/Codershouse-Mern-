@@ -194,7 +194,7 @@ io.on("connection", (socket) => {
   socket.on(ACTIONS.LEAVE, leaveRoom);
 
   const endRoom = ({ roomId }) => {
-    // Now from the server i have to emit some event which goes and navigate our clients to /rooms so that automaticlly leave event can occur except the admin one
+    // Now from the server i have to emit some event which goes and navigate our clients to /rooms so that automaticlly leave event can occur except the admin one because admin will automaticlly leave due to /rooms navigate
     socket.broadcast.emit(ACTIONS.ADMIN_LEAVE);
   };
 
