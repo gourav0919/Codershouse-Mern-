@@ -14,5 +14,8 @@ export const socketInit = () => {
   // return io("http://localhost:5500", options);
 
   // changing this to our production url
-  return io("https://codershouse-mern.herokuapp.com/", options);
+  // return io("https://codershouse-mern.herokuapp.com/", options);
+
+  // Changing it to environment variables
+  return io(process.env.REACT_APP_API_URL, options);
 };

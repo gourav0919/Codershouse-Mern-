@@ -55,6 +55,11 @@ export const getSingleRoom = (roomId) => {
   return api.get(`api/rooms/${roomId}`);
 };
 
+export const deleteRoom = (roomId) => {
+  // Here we are also dynamically plugin the roomId which is needed when to delete a particular room
+  return api.delete(`api/rooms/${roomId}`);
+};
+
 // Interceptors :- They sit between in every request and respone of the frontend request
 // If our application is giving with 401 code which states that our accesstoken is expires so we are now going to hit the refresh endpoint and then again going to hit the same endpoint which gives us this error
 
@@ -65,6 +70,7 @@ api.interceptors.response.use(
     return config;
   },
   async (error) => {
+    console.log("Interceptor called");
     const originalRequest = error.config;
     if (
       error.response.status === 401 &&
@@ -74,9 +80,10 @@ api.interceptors.response.use(
       // we make it true so that it states that your refresh token is invalid
       originalRequest._isRetry = true;
       try {
+        // Putting slash is neccessary everywhere either in development and production as well
         // I  think a double slash is coming because of
         // change it to slash for the developmment
-        await axios.get(`${process.env.REACT_APP_API_URL}api/refresh`, {
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/refresh`, {
           withCredentials: true,
         });
 

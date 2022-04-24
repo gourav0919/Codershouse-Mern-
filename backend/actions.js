@@ -12,6 +12,8 @@ const ACTIONS = {
   MUTE: "mute",
   UNMUTE: "un-mute",
   MUTE_INFO: "mute-info",
+  END_ROOM: "end-room",
+  ADMIN_LEAVE: "admin-leave",
 };
 
 module.exports = ACTIONS;

@@ -15,6 +15,6 @@ class RoomDto {
     this.createdAt = room.createdAt;
   }
 }
-  
+
 // here we did not create the instance because here we are providing different data every time and using it the different objects
 module.exports = RoomDto;

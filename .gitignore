@@ -22,6 +22,7 @@ build
 .env
 .env.dev
 .env.prod
+storage
 
 npm-debug.log*
 yarn-debug.log*

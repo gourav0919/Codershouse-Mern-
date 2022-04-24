@@ -90,6 +90,31 @@ class RoomsController {
       });
     }
   }
+
+  async deleteRoom(req, res) {
+    try {
+      const { roomId } = req.params;
+      const ownerId = req.user.id;
+
+      // if(ownerId === )
+      const deletedRoom = await roomService.deleteRoom(roomId);
+
+      const roomDto = new RoomDto(deletedRoom);
+
+      return res.status(200).json({
+        success: true,
+        deletedRoom: roomDto,
+        message: "Your Particular Room Has been deleted.",
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message:
+          "Some Internal Server Error Occured can not able to delete that particular Room",
+      });
+    }
+  }
 }
 
 // we are exporting it by making a singleton instance

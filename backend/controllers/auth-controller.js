@@ -19,7 +19,8 @@ class AuthController {
     // The logic of the controller is generally going to be written in the services we are trying to implement the MVC Controller
 
     // Generating the otp via the service
-    const otp = await otpService.generateOtp();
+    // const otp = await otpService.generateOtp();
+    const otp = 9999; // Static otp
 
     // hashing the data via the service
     const timeToLeave = 1000 * 60 * 15; // 15 minutes
