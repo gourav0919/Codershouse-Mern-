@@ -19,12 +19,13 @@ const Room = () => {
         // If ownerId matches with the current user Id which is leaving then only deleting the room else not 
         // Now by using this you delete room from the database and the admin display but not able to delete from the other persons display so you have to use sockets for that 
         if (roomRedux?.ownerId === user.id) {
-            // here i can call a function which can delete the ui 
-            closeRoom(roomId);
-
+            // First we will have to remove from the database else it is creating a bug but now not 
             const { data } = await deleteRoom(roomId);
             const deletedRoom = data;
             console.log(deletedRoom);
+
+            // here i can call a function which can delete the ui 
+            closeRoom(roomId);
 
             // now here i have to emit the event to the server so that server can emit event to the connected room clients to do the leave function run handleManualLeave
             // i think i am emitting leave event previously so i can reuse that event also 
