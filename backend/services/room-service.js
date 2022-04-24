@@ -41,6 +41,11 @@ class RoomService {
     const singleRoom = await RoomModel.findById(roomId);
     return singleRoom;
   }
+
+  async deleteRoom(roomId) {
+    const deletedRoom = await RoomModel.findByIdAndDelete(roomId);
+    return deletedRoom;
+  }
 }
 
 module.exports = new RoomService();

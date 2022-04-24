@@ -27,5 +27,6 @@ router.get("/api/rooms", authMiddleware, roomsController.getAllPublicRooms);
 
 // In this way we get the dynamic roomId for every room and a dynamic url which will be automaticlly handled by the express.0
 router.get("/api/rooms/:roomId", authMiddleware, roomsController.getSingleRoom);
+router.delete("/api/rooms/:roomId", authMiddleware, roomsController.deleteRoom);
 
 module.exports = router;

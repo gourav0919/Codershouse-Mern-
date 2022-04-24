@@ -2,19 +2,48 @@ import React, { useEffect, useState } from 'react'
 import styles from './Room.module.css'
 import { useParams } from 'react-router-dom'
 import { useWebRTC } from '../../hooks/useWebRTC'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getSingleRoom } from '../../http'
+import { getSingleRoom, deleteRoom } from '../../http'
+import { setRoom as setRoomRedux } from '../../store/roomSlice';
 
 const Room = () => {
     const { roomId } = useParams();
     const { user } = useSelector((state) => state.auth);
-    const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
+    const { room: roomRedux } = useSelector((state) => state.room);
+    const { clients, provideRef, handleMute, closeRoom, leaveManually } = useWebRTC(roomId, user);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
-    const handleManualLeave = () => {
+    const handleManualLeave = async () => {
+        // If ownerId matches with the current user Id which is leaving then only deleting the room else not 
+        // Now by using this you delete room from the database and the admin display but not able to delete from the other persons display so you have to use sockets for that 
+        if (roomRedux?.ownerId === user.id) {
+            // here i can call a function which can delete the ui 
+            closeRoom(roomId);
+
+            const { data } = await deleteRoom(roomId);
+            const deletedRoom = data;
+            console.log(deletedRoom);
+
+            // now here i have to emit the event to the server so that server can emit event to the connected room clients to do the leave function run handleManualLeave
+            // i think i am emitting leave event previously so i can reuse that event also 
+        }
+
+        // This navigation is doing the work of frontend and backend to call leave event or emit it.
         navigate('/rooms');
+
+        // In case of leave the room setting the room redux state to null
+        // console.log("Running after /rooms navigation.");
+        dispatch(setRoomRedux(null));
     }
+
+    useEffect(() => {
+        if (leaveManually) {
+            handleManualLeave();
+        }
+    }, [leaveManually]);
+
 
     const [room, setRoom] = useState(null);
     useEffect(() => {
@@ -22,6 +51,10 @@ const Room = () => {
             const { data } = await getSingleRoom(roomId);
             const { room } = data;
             setRoom((prev) => room);
+
+            // Adding the data to the redux toolkit in the room Slice or state \
+            // here i am passing room directly because i use room directly in the room slice payload
+            dispatch(setRoomRedux(room));
         };
 
         fetchRoom();

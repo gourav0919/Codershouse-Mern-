@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import { useStateWithCallback } from "./useStateWithCallback";
 import { socketInit } from "../socket";
 import { ACTIONS } from "../actions";
@@ -11,6 +11,7 @@ export const useWebRTC = (roomId, user) => {
   const localMediaStream = useRef(null);
   const socket = useRef(null);
   const clientsRef = useRef([]);
+  const [leaveManually, setLeaveManually] = useState(false);
 
   useEffect(() => {
     clientsRef.current = clients;
@@ -183,6 +184,9 @@ export const useWebRTC = (roomId, user) => {
       socket.current.on(ACTIONS.UNMUTE, ({ peerId, userId }) => {
         setMute(false, userId);
       });
+      socket.current.on(ACTIONS.ADMIN_LEAVE, () => {
+        setLeaveManually(true);
+      });
 
       // emitting of event
       socket.current.emit(ACTIONS.JOIN, { roomId, user });
@@ -197,6 +201,10 @@ export const useWebRTC = (roomId, user) => {
       localMediaStream.current.getTracks().forEach((track) => {
         track.stop();
       });
+
+      // If room Owner Id is same as the user Id which is leaving the room then in this case we know that we have to remove all of the user from the room.
+      // or for every user we have to remove the connection and also from the ui
+
       socket.current.emit(ACTIONS.LEAVE, { roomId });
 
       // This cleaner is also neccessary
@@ -213,8 +221,14 @@ export const useWebRTC = (roomId, user) => {
       socket.current.off(ACTIONS.REMOVE_PEER);
       socket.current.off(ACTIONS.MUTE);
       socket.current.off(ACTIONS.UNMUTE);
+      socket.current.off(ACTIONS.ADMIN_LEAVE);
     };
   }, []);
+
+  const closeRoom = (roomId) => {
+    // here i am able to use the socket because it is reference or make by using the useRef hook so its value can be changing and we are getting new value every time
+    socket.current.emit(ACTIONS.END_ROOM, { roomId });
+  };
 
   const provideRef = (instance, userId) => {
     audioElements.current[userId] = instance;
@@ -256,5 +270,5 @@ export const useWebRTC = (roomId, user) => {
     [clients, setClients]
   );
 
-  return { clients, provideRef, handleMute };
+  return { clients, provideRef, handleMute, closeRoom, leaveManually };
 };

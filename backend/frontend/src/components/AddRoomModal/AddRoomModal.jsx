@@ -4,6 +4,7 @@ import TextInput from "../shared/TextInput/TextInput";
 import { createRoom as createNewRoom } from "../../http";
 import { useNavigate } from 'react-router-dom'
 
+// We make a state of showModal which tells the Addroom Modal is show or not. 
 const AddRoomModal = ({ closeAddRoomModal }) => {
     const navigate = useNavigate();
 
@@ -53,7 +54,17 @@ const AddRoomModal = ({ closeAddRoomModal }) => {
 
     }
 
+    // The implementation of this functionality is very very difficult and not feasible in this type of structure for this functionality you have to change the css and all of the structure which i did not want until
+    // let outsideModalClick = true;
+    // const outsideModalClickHandling = () => {
+    //     if (outsideModalClick) {
+    //         closeAddRoomModal();
+    //     }
+    // }
+
     return (
+        // <div className={styles.modalMask} onClick={outsideModalClickHandling}>
+        //     <div className={styles.modalBody} onClick={() => { outsideModalClick = false }}>
         <div className={styles.modalMask}>
             <div className={styles.modalBody}>
                 <button className={styles.closeAddRoomBtn} onClick={closeAddRoomModal}>

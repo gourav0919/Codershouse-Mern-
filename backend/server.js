@@ -193,7 +193,15 @@ io.on("connection", (socket) => {
   // If user emit a leave event from the
   socket.on(ACTIONS.LEAVE, leaveRoom);
 
+  const endRoom = ({ roomId }) => {
+    // Now from the server i have to emit some event which goes and navigate our clients to /rooms so that automaticlly leave event can occur except the admin one
+    socket.broadcast.emit(ACTIONS.ADMIN_LEAVE);
+  };
+
+  socket.on(ACTIONS.END_ROOM, endRoom);
+
   // if user in any case close the browser directly then the event of disconnecting will occur first which will run the leave room function
+  // If admin close his browser then the difficulty can be create
   socket.on("disconnecting", leaveRoom);
 });
 
