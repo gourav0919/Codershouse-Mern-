@@ -44,6 +44,8 @@ console.log(pathPac.join(__dirname1, "storage/avatar-images"));
 app.use(
   "/storage/avatar-images",
   express.static(pathPac.join(__dirname1, "backend/storage/avatar-images"))
+  // Trying to do this change because we are already in the backend folder so we did not write that
+  // express.static(pathPac.join(__dirname1, "storage/avatar-images"))
 );
 // app.use("/storage/avatar-images", express.static("storage/avatar-images"));
 

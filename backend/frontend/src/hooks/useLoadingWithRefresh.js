@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../store/authSlice";
 
+// Discovered the error we have to run the app again due to adding of config vars
+
 export function useLoadingWithRefresh() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
